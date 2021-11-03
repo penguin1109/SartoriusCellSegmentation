@@ -23,16 +23,16 @@ This competition is evaluated on the mean average precision at different interse
 
 
 ---
-![Img01](https://github.com/penguin1109/SartoriusCellSegmentation/blob/master/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7(4).png)
+![Img01](https://github.com/penguin1109/SartoriusCellSegmentation/blob/master/img01.png)
 
 
 The metric sweeps over a range of IoU thresholds, at each point calculating an average precision value. The threshold values range from 0.5 to 0.95 with a step size of 0.05: (0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95). In other words, at a threshold of 0.5, a predicted object is considered a "hit" if its intersection over union with a ground truth object is greater than 0.5.
 
 At each threshold value , a precision value is calculated based on the number of true positives (TP), false negatives (FN), and false positives (FP) resulting from comparing the predicted object to all ground truth objects:
 
-![Img02](https://github.com/penguin1109/SartoriusCellSegmentation/blob/master/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7(5).png)
+![Img02](https://github.com/penguin1109/SartoriusCellSegmentation/blob/master/img02.png)
 Lastly, the score returned by the competition metric is the mean taken over the individual average precisions of each image in the test dataset.  
-![Img03](https://github.com/penguin1109/SartoriusCellSegmentation/blob/master/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B764).png)  
+![Img03](https://github.com/penguin1109/SartoriusCellSegmentation/blob/master/img03.png)
 
 Submission File
 In order to reduce the submission file size, our metric uses run-length encoding on the pixel values. Instead of submitting an exhaustive list of indices for your segmentation, you will submit pairs of values that contain a start position and a run length. E.g. '1 3' implies starting at pixel 1 and running a total of 3 pixels (1,2,3).
