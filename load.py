@@ -48,17 +48,22 @@ for x in CELL_TYPES: print(f"\t--> {x}")
     
 print("\n\n... BASIC DATA SETUP FINISHING ...\n")
 
-# 환경변수의 CUDA 정보를 할당해서 GPU를 tensorflow가 사용할 수 있도록 한다.
-import os
+"""SET MODEL LIBRARY DIRECTORY"""
 
-os.enviorn["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.enviorn["CUDA_VISIBLE_DEVICES"] = "0" # number of gpu
+LIB_DIR = '/content/drive/MyDrive/AIforMedicalDiagnosis/CELLKAGGLE/automl'
+import sys, os
+sys.path.insert(0, LIB_DIR)
+sys.path.insert(0, os.path.join(LIB_DIR, "efficientdet"))
+sys.path.insert(0, os.path.join(LIB_DIR, "efficientdet", "tf2"))
 
-# tensorflow의 경우에 모든 gpu의 메모리를 할당받은 후에 
-import tensorflow as tf
-
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True
-
-# 세션 사용시.
-# session = tf.Session(config=config)
+import hparams_config
+from tf2 import train_lib
+from tf2 import anchors
+from tf2 import efficientdet_keras
+from tf2 import label_util
+from tf2 import postprocess
+from tf2 import util_keras
+from tf2.train import setup_model
+from efficientdet import dataloader
+from visualize import vis_utils
+from inference import visualize_image

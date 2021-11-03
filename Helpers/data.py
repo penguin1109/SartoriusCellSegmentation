@@ -1,6 +1,9 @@
 # UPDATE THE TRAIN DATAFRAME
 
 # Aggregate under training 
+from load import CELL_TYPES
+
+
 train_df["img_path"] = train_df["id"].apply(lambda x: os.path.join(TRAIN_DIR, x+".png")) # Capture Image Path As Well
 tmp_df = train_df.drop_duplicates(subset=["id", "img_path"]).reset_index(drop=True)
 tmp_df["annotation"] = train_df.groupby("id")["annotation"].agg(list).reset_index(drop=True)
@@ -38,6 +41,21 @@ print("\n\n... PLATE TIME VALUE COUNTS ...")
 for k, v in train_df.plate_time.value_counts().items():
     print(f"\t--> There are {v} images with SAMPLE_DATe={k}")
 fig = px.histogram(train_df, train_df.sample_date.apply(lambda x:x.replace("-", "_")), color = "cell_type", title = "<b>Sample Date Value Histogram</b>")
+fig.show()
+
+print("\n\n...SAMPLE DATE VALUE COUNTS...")
+for k, v in train_df.sample_date.value_counts().items():
+    print(f"\t-->There are {v} images with SAMPLE_DATE={k}")
+fig = px.histogram(train_df, "elapsed_timedelta", color="cell_type", title="<b>Elapsed Time Delta</b>")
+
+for ct in CELL_TYPES:
+    print(f"\n\n ...SHOWING THREE EXAMPLES OF CELL TYPE{ct.upper()} ..\n")
+    for i in range(3):
+        img, mask = get_img_and_mask(**train_df[train_df.cell_type==ct][["img_path", "annotation", "width", "height"]].sample(3).reset_index(drop=True).iloc[i].to_dict())
+        plot_img_and_mask(img, mask)
+
+
+
 
 
 
