@@ -14,7 +14,6 @@ def first_train(train_dl):
     - Segmentation Mask
     """
     # use 'take(1)' to only pull one example from the dataset
-
     for _image_batch, _label_batch in train_dl.take(1):
         # get information for the ground truth data
         gt_mask = _label_batch["image_masks"][:,0]
@@ -59,6 +58,7 @@ def validate_first(val_dl):
     None
     """
 
+# function for predicting the segmented cells for the test images  
 def make_prediction(test_dl):
     """
     Input : 

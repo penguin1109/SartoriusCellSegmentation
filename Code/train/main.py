@@ -1,4 +1,5 @@
-# utility for efficient detection model and constants
+import tensorflow as tf
+#  utility for efficient detection model and constants
 IMAGE_SHAPE = (train_df.iloc[0].height, train_df.iloc[0].width, 3)
 INPUT_SHAPE = (640, 640, 3)
 SEG_SHAPE = (INPUT_SHAPE[0]//4, INPUT_SHAPE[1]//4, 1)
@@ -123,7 +124,8 @@ with strategy.scope():
 
 model.summary()
 
-# train the model
+# train the model (not the first batch)
+# the first batch is generated as EVALUATION MODE, to see if the customized functions and dataloaders work well
 if DO_TRAIN:
     history = model.fit(
         train_df,

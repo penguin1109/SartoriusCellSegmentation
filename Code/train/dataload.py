@@ -8,6 +8,8 @@ OUTPUT :
 - Segmented Image (64, 64, 3)
 """
 import Models.settings
+
+import tensorflow as tf
 import numpy as np
 import cv2
 
